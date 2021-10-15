@@ -43,6 +43,11 @@ button,
   font-size: 1rem;
 }
 
+#selecionar-atributo {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
 h2 {
   color: #123808;
   background-color: #ffffff;

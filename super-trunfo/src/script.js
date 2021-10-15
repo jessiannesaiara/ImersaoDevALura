@@ -85,7 +85,7 @@ function sortearCarta() {
     numeroCartaJogador = parseInt(Math.random() * 3);
   }
   cartaJogador = cartas[numeroCartaJogador];
-  console.log(cartaJogador);
+
 
   document.getElementById("btnSortear").disabled = true;
   document.getElementById("btnJogar").disabled = false;
@@ -94,43 +94,55 @@ function sortearCarta() {
 
 function obtemAtributoSelecionado() {
   var radioAtributo = document.getElementsByName("atributo");
+  let divResultado = document.getElementById("resultado");
+
   for (var i = 0; i < radioAtributo.length; i++) {
     if (radioAtributo[i].checked) {
       return radioAtributo[i].value;
     }
+
   }
+  return "<p class='resultado-final'>Selecione um Atributo</p>"
+
 }
 
 function jogar() {
-  console.log("chamou");
+
   var atributoSelecionado = obtemAtributoSelecionado();
+
+  console.log(atributoSelecionado)
+
   var divResultado = document.getElementById("resultado");
 
-  console.log(atributoSelecionado);
+  if (atributoSelecionado == 'area' || atributoSelecionado == 'populacao'|| atributoSelecionado == 'municípios') {
 
-  if (
-    cartaJogador.atributos[atributoSelecionado] >
-    cartaMaquina.atributos[atributoSelecionado]
-  ) {
-    htmlResultado = "<p class='resultado-final'>Venceu</p>";
-  } else if (
-    cartaJogador.atributos[atributoSelecionado] <
-    cartaMaquina.atributos[atributoSelecionado]
-  ) {
-    htmlResultado = "<p class='resultado-final'>Perdeu</p>";
+    if (
+      cartaJogador.atributos[atributoSelecionado] >
+      cartaMaquina.atributos[atributoSelecionado]
+    ) {
+      htmlResultado = "<p class='resultado-final'>Venceu</p>";
+    } else if (
+      cartaJogador.atributos[atributoSelecionado] <
+      cartaMaquina.atributos[atributoSelecionado]
+    ) {
+      htmlResultado = "<p class='resultado-final'>Perdeu</p>";
+    } else {
+      htmlResultado = "<p class='resultado-final'>Empatou</p>";
+    }
+ 
   } else {
-    htmlResultado = "<p class='resultado-final'>Empatou</p>";
-  }
-  divResultado.innerHTML = htmlResultado;
+    htmlResultado = "<p class='resultado-final' id='selecionar-atributo'>Selecione um Atributo</p>"}
 
-  document.getElementById("btnJogar").disabled = true;
-  exibirCartaMaquina();
+    divResultado.innerHTML = htmlResultado;
+
+    document.getElementById("btnJogar").disabled = true;
+    exibirCartaMaquina();
 }
 
 function exibirCartaJogador() {
   var divCartaJogador = document.getElementById("carta-jogador");
   divCartaJogador.style.backgroundImage = `url(${cartaJogador.imagem})`;
-  // divCartaJogador.style.backgroundImage = "url(" + cartaJogador.imagem + ")"
+
   var moldura =
     '<img src="https://www.jing.fm/clipimg/full/247-2479444_15-photos-of-template-magic-card-game-magic.png" style=" width: inherit; height: inherit; position: absolute;">';
   var tagHTML = "<div id='opcoes' class='carta-status'>";
